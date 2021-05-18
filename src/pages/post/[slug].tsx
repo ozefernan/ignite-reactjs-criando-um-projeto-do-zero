@@ -26,9 +26,9 @@ interface PostProps {
   post: Post;
 }
 
-// export default function Post() {
-//   // TODO
-// }
+export default function Post() {
+  return <h1>TEste</h1>;
+}
 
 // export const getStaticPaths = async () => {
 //   const prismic = getPrismicClient();
@@ -37,9 +37,28 @@ interface PostProps {
 //   // TODO
 // };
 
-// export const getStaticProps = async context => {
-//   const prismic = getPrismicClient();
-//   const response = await prismic.getByUID(TODO);
+export const getStaticProps: GetStaticProps = async ({ req, params }) => {
+  const prismic = getPrismicClient({ req });
+  const { slug } = params;
 
-//   // TODO
-// };
+  const response = await prismic.getByUID('posts', String(slug), {});
+
+  console.log('!@#', response);
+  // const post = {
+  //   slug,
+  //   title: RichText.asText(response.data.title),
+  //   content: RichText.asHtml(response.data.content),
+  //   updatedAt: new Date(response.last_publication_date).toLocaleDateString(
+  //     'pt-BR',
+  //     {
+  //       day: '2-digit',
+  //       month: 'long',
+  //       year: 'numeric',
+  //     }
+  //   ),
+  // };
+
+  // return {
+  //   props: { post },
+  // };
+};
